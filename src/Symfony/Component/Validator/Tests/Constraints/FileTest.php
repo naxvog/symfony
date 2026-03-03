@@ -171,7 +171,7 @@ class FileTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame(100, $bConstraint->maxSize);
         self::assertSame('myMessage', $bConstraint->notFoundMessage);
-        self::assertSame(['Default', 'FileDummy'], $bConstraint->groups);
+        self::assertSame(['Default', FileDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(100000, $cConstraint->maxSize);

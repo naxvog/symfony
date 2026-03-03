@@ -30,7 +30,7 @@ class CountryTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('myMessage', $bConstraint->message);
         self::assertTrue($bConstraint->alpha3);
-        self::assertSame(['Default', 'CountryDummy'], $bConstraint->groups);
+        self::assertSame(['Default', CountryDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

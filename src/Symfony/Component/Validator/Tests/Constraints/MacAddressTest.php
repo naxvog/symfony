@@ -38,11 +38,11 @@ class MacAddressTest extends TestCase
         self::assertSame('myMessage', $aConstraint->message);
         self::assertEquals(trim(...), $aConstraint->normalizer);
         self::assertSame(MacAddress::ALL, $aConstraint->type);
-        self::assertSame(['Default', 'MacAddressDummy'], $aConstraint->groups);
+        self::assertSame(['Default', MacAddressDummy::class], $aConstraint->groups);
 
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame(MacAddress::LOCAL_UNICAST, $bConstraint->type);
-        self::assertSame(['Default', 'MacAddressDummy'], $bConstraint->groups);
+        self::assertSame(['Default', MacAddressDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

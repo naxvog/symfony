@@ -22,6 +22,12 @@ use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
 use Symfony\Component\Validator\Mapping\Loader\LoaderInterface;
 use Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader;
 use Symfony\Component\Validator\Tests\Fixtures\ConstraintA;
+use Symfony\Component\Validator\Tests\Fixtures\EntityInterfaceA;
+use Symfony\Component\Validator\Tests\Fixtures\EntityInterfaceB;
+use Symfony\Component\Validator\Tests\Fixtures\EntityParentInterface;
+use Symfony\Component\Validator\Tests\Fixtures\EntityStaticCar;
+use Symfony\Component\Validator\Tests\Fixtures\EntityStaticCarTurbo;
+use Symfony\Component\Validator\Tests\Fixtures\EntityStaticVehicle;
 use Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity;
 use Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\EntityParent;
 use Symfony\Component\Validator\Tests\Fixtures\PropertyGetter;
@@ -39,8 +45,8 @@ class LazyLoadingMetadataFactoryTest extends TestCase
         $metadata = $factory->getMetadataFor(self::PARENT_CLASS);
 
         $constraints = [
-            new ConstraintA(groups: ['Default', 'EntityParent']),
-            new ConstraintA(groups: ['Default', 'EntityInterfaceA', 'EntityParent']),
+            new ConstraintA(groups: ['Default', EntityParent::class]),
+            new ConstraintA(groups: ['Default', EntityInterfaceA::class, EntityParent::class]),
         ];
 
         $this->assertEquals($constraints, $metadata->getConstraints());
@@ -54,28 +60,28 @@ class LazyLoadingMetadataFactoryTest extends TestCase
         $constraints = [
             new ConstraintA(groups: [
                 'Default',
-                'Entity',
+                Entity::class,
             ]),
             new ConstraintA(groups: [
                 'Default',
-                'EntityParent',
-                'Entity',
+                EntityParent::class,
+                Entity::class,
             ]),
             new ConstraintA(groups: [
                 'Default',
-                'EntityInterfaceA',
-                'EntityParent',
-                'Entity',
+                EntityInterfaceA::class,
+                EntityParent::class,
+                Entity::class,
             ]),
             new ConstraintA(groups: [
                 'Default',
-                'EntityInterfaceB',
-                'Entity',
+                EntityInterfaceB::class,
+                Entity::class,
             ]),
             new ConstraintA(groups: [
                 'Default',
-                'EntityParentInterface',
-                'Entity',
+                EntityParentInterface::class,
+                Entity::class,
             ]),
         ];
 
@@ -88,8 +94,8 @@ class LazyLoadingMetadataFactoryTest extends TestCase
         $factory = new LazyLoadingMetadataFactory(new TestLoader(), $cache);
 
         $expectedConstraints = [
-            new ConstraintA(groups: ['Default', 'EntityParent']),
-            new ConstraintA(groups: ['Default', 'EntityInterfaceA', 'EntityParent']),
+            new ConstraintA(groups: ['Default', EntityParent::class]),
+            new ConstraintA(groups: ['Default', EntityInterfaceA::class, EntityParent::class]),
         ];
 
         $metadata = $factory->getMetadataFor(self::PARENT_CLASS);
@@ -142,7 +148,7 @@ class LazyLoadingMetadataFactoryTest extends TestCase
     {
         $reader = new StaticMethodLoader();
         $factory = new LazyLoadingMetadataFactory($reader);
-        $metadata = $factory->getMetadataFor('Symfony\Component\Validator\Tests\Fixtures\EntityStaticCarTurbo');
+        $metadata = $factory->getMetadataFor(EntityStaticCarTurbo::class);
         $groups = [];
 
         foreach ($metadata->getPropertyMetadata('wheels') as $propertyMetadata) {
@@ -152,9 +158,9 @@ class LazyLoadingMetadataFactoryTest extends TestCase
 
         $this->assertCount(4, $groups);
         $this->assertContains('Default', $groups);
-        $this->assertContains('EntityStaticCarTurbo', $groups);
-        $this->assertContains('EntityStaticCar', $groups);
-        $this->assertContains('EntityStaticVehicle', $groups);
+        $this->assertContains(EntityStaticCarTurbo::class, $groups);
+        $this->assertContains(EntityStaticCar::class, $groups);
+        $this->assertContains(EntityStaticVehicle::class, $groups);
     }
 
     public function testMultipathInterfaceConstraint()

@@ -26,7 +26,7 @@ class UniqueTest extends TestCase
 
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'UniqueDummy'], $bConstraint->groups);
+        self::assertSame(['Default', UniqueDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

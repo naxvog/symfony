@@ -30,7 +30,7 @@ class TypeTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame(\DateTimeImmutable::class, $bConstraint->type);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'TypeDummy'], $bConstraint->groups);
+        self::assertSame(['Default', TypeDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['string', 'array'], $cConstraint->type);

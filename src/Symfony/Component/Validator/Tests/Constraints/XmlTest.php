@@ -32,7 +32,7 @@ class XmlTest extends TestCase
         self::assertSame('myMessage', $bConstraint->formatMessage);
         self::assertSame('mySchemaMessage', $bConstraint->schemaMessage);
         self::assertSame(\LIBXML_NONET, $bConstraint->schemaFlags);
-        self::assertSame(['Default', 'XmlDummy'], $bConstraint->groups);
+        self::assertSame(['Default', XmlDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

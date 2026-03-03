@@ -27,7 +27,7 @@ class PositiveOrZeroTest extends TestCase
         [$aConstraint] = $metadata->getPropertyMetadata('a')[0]->getConstraints();
         self::assertSame(0, $aConstraint->value);
         self::assertNull($aConstraint->propertyPath);
-        self::assertSame(['Default', 'PositiveOrZeroDummy'], $aConstraint->groups);
+        self::assertSame(['Default', PositiveOrZeroDummy::class], $aConstraint->groups);
 
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('myMessage', $bConstraint->message);

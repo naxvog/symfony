@@ -30,7 +30,7 @@ class YamlTest extends TestCase
 
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'YamlDummy'], $bConstraint->groups);
+        self::assertSame(['Default', YamlDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

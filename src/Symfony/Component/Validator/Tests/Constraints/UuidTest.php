@@ -43,7 +43,7 @@ class UuidTest extends TestCase
         self::assertFalse($bConstraint->strict);
         self::assertSame('trim', $bConstraint->normalizer);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'UuidDummy'], $bConstraint->groups);
+        self::assertSame(['Default', UuidDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

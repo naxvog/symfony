@@ -88,8 +88,8 @@ class ClassMetadataTest extends TestCase
         $this->metadata->addPropertyConstraints('lastName', [new ConstraintA(), new ConstraintB()]);
 
         $constraints = [
-            new ConstraintA(null, null, ['Default', 'Entity']),
-            new ConstraintB(null, ['Default', 'Entity']),
+            new ConstraintA(null, null, ['Default', Entity::class]),
+            new ConstraintB(null, ['Default', Entity::class]),
         ];
 
         $properties = $this->metadata->getPropertyMetadata('lastName');
@@ -105,8 +105,8 @@ class ClassMetadataTest extends TestCase
         $this->metadata->addGetterConstraint('lastName', new ConstraintB());
 
         $constraints = [
-            new ConstraintA(null, null, ['Default', 'Entity']),
-            new ConstraintB(null, ['Default', 'Entity']),
+            new ConstraintA(null, null, ['Default', Entity::class]),
+            new ConstraintB(null, ['Default', Entity::class]),
         ];
 
         $properties = $this->metadata->getPropertyMetadata('lastName');
@@ -121,8 +121,8 @@ class ClassMetadataTest extends TestCase
         $this->metadata->addGetterConstraints('lastName', [new ConstraintA(), new ConstraintB()]);
 
         $constraints = [
-            new ConstraintA(null, null, ['Default', 'Entity']),
-            new ConstraintB(null, ['Default', 'Entity']),
+            new ConstraintA(null, null, ['Default', Entity::class]),
+            new ConstraintB(null, ['Default', Entity::class]),
         ];
 
         $properties = $this->metadata->getPropertyMetadata('lastName');
@@ -143,12 +143,12 @@ class ClassMetadataTest extends TestCase
         $constraints = [
             new ConstraintA(null, null, [
                 'Default',
-                'EntityParent',
-                'Entity',
+                EntityParent::class,
+                Entity::class,
             ]),
             new ConstraintA(null, null, [
                 'Default',
-                'Entity',
+                Entity::class,
             ]),
         ];
 
@@ -166,12 +166,12 @@ class ClassMetadataTest extends TestCase
 
         $constraintA1 = new ConstraintA(null, null, [
             'Default',
-            'EntityParent',
-            'Entity',
+            EntityParent::class,
+            Entity::class,
         ]);
         $constraintA2 = new ConstraintA(null, null, [
             'Default',
-            'Entity',
+            Entity::class,
         ]);
         $constraintB = new ConstraintB(null, ['foo']);
 
@@ -181,13 +181,13 @@ class ClassMetadataTest extends TestCase
         $this->assertEquals(self::CLASSNAME, $members[0]->getClassName());
         $this->assertEquals([$constraintA2], $members[0]->getConstraints());
         $this->assertEquals([$constraintA2], $members[0]->findConstraints('Default'));
-        $this->assertEquals([$constraintA2], $members[0]->findConstraints('Entity'));
+        $this->assertEquals([$constraintA2], $members[0]->findConstraints(Entity::class));
 
         $this->assertEquals(self::PARENTCLASS, $members[1]->getClassName());
         $this->assertEquals([$constraintA1, $constraintB], $members[1]->getConstraints());
         $this->assertEquals([$constraintA1], $members[1]->findConstraints('Default'));
-        $this->assertEquals([$constraintA1], $members[1]->findConstraints('Entity'));
-        $this->assertEquals([$constraintA1], $members[1]->findConstraints('EntityParent'));
+        $this->assertEquals([$constraintA1], $members[1]->findConstraints(Entity::class));
+        $this->assertEquals([$constraintA1], $members[1]->findConstraints(EntityParent::class));
         $this->assertEquals([$constraintB], $members[1]->findConstraints('foo'));
     }
 
@@ -210,14 +210,14 @@ class ClassMetadataTest extends TestCase
         $parentConstraints = [
             new ConstraintA(null, null, [
                 'Default',
-                'EntityParent',
-                'Entity',
+                EntityParent::class,
+                Entity::class,
             ]),
         ];
         $constraints = [
             new ConstraintA(null, null, [
                 'Default',
-                'Entity',
+                Entity::class,
             ]),
         ];
 
@@ -252,6 +252,15 @@ class ClassMetadataTest extends TestCase
     public function testGroupSequencesWorkIfContainingDefaultGroup()
     {
         $this->metadata->setGroupSequence(['Foo', $this->metadata->getDefaultGroup()]);
+
+        $this->assertInstanceOf(GroupSequence::class, $this->metadata->getGroupSequence());
+    }
+
+    public function testGroupSequencesWorkIfContainingDefaultLegacyGroup()
+    {
+        $group = $this->metadata->getDefaultGroup();
+        $class = substr($group, strrpos($group, '\\') + 1);
+        $this->metadata->setGroupSequence(['Foo', $class]);
 
         $this->assertInstanceOf(GroupSequence::class, $this->metadata->getGroupSequence());
     }

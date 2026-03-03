@@ -77,7 +77,7 @@ class TimezoneTest extends TestCase
         self::assertSame(\DateTimeZone::PER_COUNTRY, $bConstraint->zone);
         self::assertSame('DE', $bConstraint->countryCode);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'TimezoneDummy'], $bConstraint->groups);
+        self::assertSame(['Default', TimezoneDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

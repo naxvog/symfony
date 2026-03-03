@@ -56,7 +56,7 @@ final class WhenTest extends TestCase
         self::assertEquals([
             new Callback(
                 callback: 'callback',
-                groups: ['Default', 'WhenTestWithAttributes'],
+                groups: ['Default', WhenTestWithAttributes::class],
             ),
         ], $classConstraint->constraints);
         self::assertSame([], $classConstraint->otherwise);
@@ -66,11 +66,11 @@ final class WhenTest extends TestCase
         self::assertInstanceOf(When::class, $fooConstraint);
         self::assertSame('true', $fooConstraint->expression);
         self::assertEquals([
-            new NotNull(groups: ['Default', 'WhenTestWithAttributes']),
-            new NotBlank(groups: ['Default', 'WhenTestWithAttributes']),
+            new NotNull(groups: ['Default', WhenTestWithAttributes::class]),
+            new NotBlank(groups: ['Default', WhenTestWithAttributes::class]),
         ], $fooConstraint->constraints);
         self::assertSame([], $fooConstraint->otherwise);
-        self::assertSame(['Default', 'WhenTestWithAttributes'], $fooConstraint->groups);
+        self::assertSame(['Default', WhenTestWithAttributes::class], $fooConstraint->groups);
 
         [$barConstraint] = $metadata->getPropertyMetadata('bar')[0]->getConstraints();
 
@@ -96,11 +96,11 @@ final class WhenTest extends TestCase
         self::assertInstanceOf(When::class, $bazConstraint);
         self::assertSame('true', $bazConstraint->expression);
         self::assertEquals([
-            new NotNull(groups: ['Default', 'WhenTestWithAttributes']),
-            new NotBlank(groups: ['Default', 'WhenTestWithAttributes']),
+            new NotNull(groups: ['Default', WhenTestWithAttributes::class]),
+            new NotBlank(groups: ['Default', WhenTestWithAttributes::class]),
         ], $bazConstraint->constraints);
         self::assertSame([], $bazConstraint->otherwise);
-        self::assertSame(['Default', 'WhenTestWithAttributes'], $bazConstraint->groups);
+        self::assertSame(['Default', WhenTestWithAttributes::class], $bazConstraint->groups);
 
         [$quuxConstraint] = $metadata->getPropertyMetadata('quux')[0]->getConstraints();
 
@@ -140,6 +140,6 @@ final class WhenTest extends TestCase
             new NotBlank(groups: ['Default', 'WhenTestWithClosure']),
         ], $fooConstraint->constraints);
         self::assertSame([], $fooConstraint->otherwise);
-        self::assertSame(['Default', 'WhenTestWithClosure'], $fooConstraint->groups);
+        self::assertSame(['Default', WhenTestWithClosure::class], $fooConstraint->groups);
     }
 }

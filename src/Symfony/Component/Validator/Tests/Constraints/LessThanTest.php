@@ -31,7 +31,7 @@ class LessThanTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame(4711, $bConstraint->value);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'LessThanDummy'], $bConstraint->groups);
+        self::assertSame(['Default', LessThanDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertNull($cConstraint->value);

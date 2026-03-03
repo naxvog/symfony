@@ -42,7 +42,7 @@ class NotCompromisedPasswordTest extends TestCase
         self::assertSame('myMessage', $bConstraint->message);
         self::assertSame(42, $bConstraint->threshold);
         self::assertTrue($bConstraint->skipOnError);
-        self::assertSame(['Default', 'NotCompromisedPasswordDummy'], $bConstraint->groups);
+        self::assertSame(['Default', NotCompromisedPasswordDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

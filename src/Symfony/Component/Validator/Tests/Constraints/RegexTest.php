@@ -111,7 +111,7 @@ class RegexTest extends TestCase
         self::assertSame('/^[0-9]+$/', $bConstraint->pattern);
         self::assertSame('[0-9]+', $bConstraint->htmlPattern);
         self::assertFalse($bConstraint->match);
-        self::assertSame(['Default', 'RegexDummy'], $bConstraint->groups);
+        self::assertSame(['Default', RegexDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

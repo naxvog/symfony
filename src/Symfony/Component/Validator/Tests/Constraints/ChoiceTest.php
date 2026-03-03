@@ -27,13 +27,13 @@ class ChoiceTest extends TestCase
         /** @var Choice $aConstraint */
         [$aConstraint] = $metadata->getPropertyMetadata('a')[0]->getConstraints();
         self::assertSame([1, 2], $aConstraint->choices);
-        self::assertSame(['Default', 'ChoiceDummy'], $aConstraint->groups);
+        self::assertSame(['Default', ChoiceDummy::class], $aConstraint->groups);
 
         /** @var Choice $bConstraint */
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame(['foo', 'bar'], $bConstraint->choices);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'ChoiceDummy'], $bConstraint->groups);
+        self::assertSame(['Default', ChoiceDummy::class], $bConstraint->groups);
 
         /** @var Choice $cConstraint */
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();

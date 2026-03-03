@@ -35,7 +35,7 @@ class ImageTest extends TestCase
         self::assertSame(200, $bConstraint->maxWidth);
         self::assertSame(50, $bConstraint->minHeight);
         self::assertSame(200, $bConstraint->maxHeight);
-        self::assertSame(['Default', 'ImageDummy'], $bConstraint->groups);
+        self::assertSame(['Default', ImageDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(100000, $cConstraint->maxSize);

@@ -76,12 +76,7 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
     public function __construct(string $class)
     {
         $this->name = $class;
-        // class name without namespace
-        if (false !== $nsSep = strrpos($class, '\\')) {
-            $this->defaultGroup = substr($class, $nsSep + 1);
-        } else {
-            $this->defaultGroup = $class;
-        }
+        $this->defaultGroup = $class;
     }
 
     public function __serialize(): array
@@ -361,7 +356,11 @@ class ClassMetadata extends GenericMetadata implements ClassMetadataInterface
             throw new GroupDefinitionException(\sprintf('The group "%s" is not allowed in group sequences.', Constraint::DEFAULT_GROUP));
         }
 
-        if (!\in_array($this->getDefaultGroup(), $groupSequence->groups, true)) {
+        if (
+            !\in_array($this->getDefaultGroup(), $groupSequence->groups, true)
+            && !(false === $nsSep = strrpos($this->getDefaultGroup(), '\\'))
+            && !\in_array(substr($this->getDefaultGroup(), $nsSep + 1), $groupSequence->groups, true)
+        ) {
             throw new GroupDefinitionException(\sprintf('The group "%s" is missing in the group sequence.', $this->getDefaultGroup()));
         }
 

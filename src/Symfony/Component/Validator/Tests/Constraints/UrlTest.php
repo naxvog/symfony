@@ -44,7 +44,7 @@ class UrlTest extends TestCase
         self::assertSame(['ftp', 'gopher'], $bConstraint->protocols);
         self::assertSame('trim', $bConstraint->normalizer);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'UrlDummy'], $bConstraint->groups);
+        self::assertSame(['Default', UrlDummy::class], $bConstraint->groups);
         self::assertFalse($bConstraint->requireTld);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();

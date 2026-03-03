@@ -26,7 +26,7 @@ class CurrencyTest extends TestCase
 
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'CurrencyDummy'], $bConstraint->groups);
+        self::assertSame(['Default', CurrencyDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

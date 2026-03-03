@@ -31,7 +31,7 @@ class EqualToTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame(4711, $bConstraint->value);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'EqualToDummy'], $bConstraint->groups);
+        self::assertSame(['Default', EqualToDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertNull($cConstraint->value);

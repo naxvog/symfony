@@ -33,7 +33,7 @@ final class CssColorTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame([CssColor::HEX_LONG], $bConstraint->formats);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'CssColorDummy'], $bConstraint->groups);
+        self::assertSame(['Default', CssColorDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame([CssColor::HEX_SHORT], $cConstraint->formats);

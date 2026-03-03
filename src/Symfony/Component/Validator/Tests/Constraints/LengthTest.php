@@ -86,7 +86,7 @@ class LengthTest extends TestCase
         self::assertSame('myMaxMessage', $bConstraint->maxMessage);
         self::assertSame('trim', $bConstraint->normalizer);
         self::assertSame('ISO-8859-15', $bConstraint->charset);
-        self::assertSame(['Default', 'LengthDummy'], $bConstraint->groups);
+        self::assertSame(['Default', LengthDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

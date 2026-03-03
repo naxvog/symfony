@@ -32,7 +32,7 @@ class ExpressionTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('value == "1"', $bConstraint->expression);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'ExpressionDummy'], $bConstraint->groups);
+        self::assertSame(['Default', ExpressionDummy::class], $bConstraint->groups);
         self::assertTrue($bConstraint->negate);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();

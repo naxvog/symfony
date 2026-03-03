@@ -30,7 +30,7 @@ class IsbnTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame(Isbn::ISBN_13, $bConstraint->type);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'IsbnDummy'], $bConstraint->groups);
+        self::assertSame(['Default', IsbnDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

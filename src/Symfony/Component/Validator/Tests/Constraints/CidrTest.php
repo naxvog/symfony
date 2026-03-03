@@ -141,7 +141,7 @@ class CidrTest extends TestCase
         self::assertSame('myMessage', $bConstraint->message);
         self::assertSame(10, $bConstraint->netmaskMin);
         self::assertSame(126, $bConstraint->netmaskMax);
-        self::assertSame(['Default', 'CidrDummy'], $bConstraint->groups);
+        self::assertSame(['Default', CidrDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

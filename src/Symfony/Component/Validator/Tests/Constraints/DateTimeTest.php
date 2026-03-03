@@ -30,7 +30,7 @@ class DateTimeTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('d.m.Y', $bConstraint->format);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'DateTimeDummy'], $bConstraint->groups);
+        self::assertSame(['Default', DateTimeDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame('m/d/Y', $cConstraint->format);

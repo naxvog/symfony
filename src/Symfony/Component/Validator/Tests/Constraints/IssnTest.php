@@ -32,7 +32,7 @@ class IssnTest extends TestCase
         self::assertSame('myMessage', $bConstraint->message);
         self::assertTrue($bConstraint->caseSensitive);
         self::assertTrue($bConstraint->requireHyphen);
-        self::assertSame(['Default', 'IssnDummy'], $bConstraint->groups);
+        self::assertSame(['Default', IssnDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

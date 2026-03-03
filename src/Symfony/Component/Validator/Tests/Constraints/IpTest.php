@@ -41,7 +41,7 @@ class IpTest extends TestCase
         self::assertSame(Ip::V6, $bConstraint->version);
         self::assertSame('myMessage', $bConstraint->message);
         self::assertSame('trim', $bConstraint->normalizer);
-        self::assertSame(['Default', 'IpDummy'], $bConstraint->groups);
+        self::assertSame(['Default', IpDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

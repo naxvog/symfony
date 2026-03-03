@@ -43,7 +43,7 @@ class VideoTest extends TestCase
         self::assertSame(200, $bConstraint->maxWidth);
         self::assertSame(50, $bConstraint->minHeight);
         self::assertSame(200, $bConstraint->maxHeight);
-        self::assertSame(['Default', 'VideoDummy'], $bConstraint->groups);
+        self::assertSame(['Default', VideoDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(100000, $cConstraint->maxSize);

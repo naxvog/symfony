@@ -31,7 +31,7 @@ class CardSchemeTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame([CardScheme::AMEX], $bConstraint->schemes);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'CardSchemeDummy'], $bConstraint->groups);
+        self::assertSame(['Default', CardSchemeDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame([CardScheme::DINERS], $cConstraint->schemes);

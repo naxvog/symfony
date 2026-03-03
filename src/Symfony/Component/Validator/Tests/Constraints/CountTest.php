@@ -35,7 +35,7 @@ class CountTest extends TestCase
         self::assertNull($bConstraint->divisibleBy);
         self::assertSame('myMinMessage', $bConstraint->minMessage);
         self::assertSame('myMaxMessage', $bConstraint->maxMessage);
-        self::assertSame(['Default', 'CountDummy'], $bConstraint->groups);
+        self::assertSame(['Default', CountDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertNull($cConstraint->min);

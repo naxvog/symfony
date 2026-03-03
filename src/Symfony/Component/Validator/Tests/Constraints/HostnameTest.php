@@ -30,7 +30,7 @@ class HostnameTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertFalse($bConstraint->requireTld);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'HostnameDummy'], $bConstraint->groups);
+        self::assertSame(['Default', HostnameDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['my_group'], $cConstraint->groups);

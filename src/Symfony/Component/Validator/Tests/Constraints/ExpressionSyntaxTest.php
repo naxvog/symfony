@@ -55,7 +55,7 @@ class ExpressionSyntaxTest extends TestCase
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('my_service', $bConstraint->service);
         self::assertSame('myMessage', $bConstraint->message);
-        self::assertSame(['Default', 'ExpressionSyntaxDummy'], $bConstraint->groups);
+        self::assertSame(['Default', ExpressionSyntaxDummy::class], $bConstraint->groups);
 
         [$cConstraint] = $metadata->getPropertyMetadata('c')[0]->getConstraints();
         self::assertSame(['foo', 'bar'], $cConstraint->allowedVariables);

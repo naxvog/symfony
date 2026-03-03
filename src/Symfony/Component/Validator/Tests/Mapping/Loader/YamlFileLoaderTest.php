@@ -109,7 +109,7 @@ class YamlFileLoaderTest extends TestCase
         $loader->loadClassMetadata($metadata);
 
         $expected = new ClassMetadata(Entity::class);
-        $expected->setGroupSequence(['Foo', 'Entity']);
+        $expected->setGroupSequence(['Foo', Entity::class]);
         $expected->addConstraint(new ConstraintA());
         $expected->addConstraint(new ConstraintB());
         $expected->addConstraint(new Callback('validateMe'));

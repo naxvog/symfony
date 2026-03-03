@@ -27,7 +27,7 @@ class NegativeTest extends TestCase
         [$aConstraint] = $metadata->getPropertyMetadata('a')[0]->getConstraints();
         self::assertSame(0, $aConstraint->value);
         self::assertNull($aConstraint->propertyPath);
-        self::assertSame(['Default', 'NegativeDummy'], $aConstraint->groups);
+        self::assertSame(['Default', NegativeDummy::class], $aConstraint->groups);
 
         [$bConstraint] = $metadata->getPropertyMetadata('b')[0]->getConstraints();
         self::assertSame('myMessage', $bConstraint->message);
